@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- My CSS File -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <title>Brent Burdick</title>
+</head>
+<body>
+    <div id="root">
+<h1>Hi</h1>
+<p>This is an encrypting software inspired by week 2 pset of the CS50 course. Input a 26 letter key and your message will be encrypted using this key. The key must be 26 letters, no spaces.</p>
+<form>
+    <label for="key">Insert key here:</label><br>
+    <input type="text" id="key" name="key" placeholder="key" pattern="[A-Za-z]{26}" title="26 letter key" maxlength="26" size="26" autocomplete="off"> <br>
+    <label for="message">Put a message here that you want to encrypt:</label><br>
+    <input type="text" id="message"/> <br>
+    <div class="button" onclick="encrypt()">ENCRYPT</div>
+</form>
+    <div id="encryption">Your encrypted message will appear here.</div>
+    </div>
+</body>
+<script src="index.js"></script>
+</html>

@@ -1,0 +1,30 @@
+div#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input#message {
+width: 250px;
+height: 70px;
+}
+
+div.button {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+div.button:hover{
+    background-color: red;
+    cursor: help;
+}
+
+div#encryption{
+    margin-top: 30px;
+}
