@@ -1,3 +1,8 @@
+body {
+    min-height: 100vh;
+    background-color: rgb(155, 20, 20);
+}
+
 div#root {
     display: flex;
     flex-direction: column;
@@ -8,8 +13,10 @@ div#root {
 p {
     width: 40%;
     text-align: center;
+    font-weight: bold;
 }
 
 div#pyramidDiv {
     margin-top: 50px;
+    font-weight: bolder;
 }
