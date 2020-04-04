@@ -1,0 +1,32 @@
+body {
+    background-color: darkblue;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+div.container {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
+div.row {
+    display: flex;
+}
+
+div.col {
+    display: flex;
+    background-color: rgb(56, 56, 56);
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+
+}
+
+.selected {
+    background-color: rgb(141, 141, 141) !important;
+}
