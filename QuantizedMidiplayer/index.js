@@ -6,6 +6,6 @@ for (let i = 0; i < tableColumns; i++) {
 row.insertCell(i)
 }
 }
-const boxes = document.querySelectorAll("td")
+const boxes = document.querySelectorAllq("td")
 console.log(boxes)
 boxes.forEach(box => {box.addEventListener("click", toggleSelected => box.classList.toggle("selected"))})
