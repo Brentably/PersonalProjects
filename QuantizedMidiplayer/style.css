@@ -6,7 +6,7 @@ body {
     align-items: center;
 }
 
-div.container {
+.container {
     background-color: black;
     display: flex;
     flex-direction: column;
@@ -15,6 +15,14 @@ div.container {
 
 div.row {
     display: flex;
+}
+
+td {
+    background-color: rgb(56, 56, 56);
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
 }
 
 div.col {
@@ -28,5 +36,5 @@ div.col {
 }
 
 .selected {
-    background-color: rgb(141, 141, 141) !important;
+    background-color: rgb(124, 124, 124) !important;
 }
