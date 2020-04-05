@@ -16,14 +16,14 @@ table[j].childNodes[i].classList.add(`column${i}`)
 
 //Creates a new array, tableArray, where you can access any box through tableArray[row][column] 
 let tableArray = []
-for(let q = 0; q < tR; q++){
-let arrayRow = [...table[q].childNodes ]
+for(let row of table){
+let arrayRow = [...row.childNodes ]
 tableArray.push(arrayRow)
 }
 //could probably clean this up and add the previous two codeblocks together and make one codeblock that does both, but I'm not gonnna worry about that right now
 
 
-
+console.log(tableArray)
 
 
 
@@ -50,4 +50,5 @@ function toggleSelected(e) {
 
 
 const boxes = document.querySelectorAll("td")
+console.log(boxes)
 boxes.forEach(box => {box.addEventListener('click', toggleSelected)})
