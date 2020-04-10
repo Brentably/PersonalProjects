@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <form class="search-form">
+        <input type="text" class="search" placeholder="City or State">
+        <ul class="suggestions">
+            <li>Filter for a city</li>
+            <li>or a state</li>
+        </ul>
+    </form>
+    <script>
+        const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+        const cities = []
+
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => cities.push(...data))
+
+        //console.log(cities)
+
+
+        const findList = () => {
+            let inputText = document.querySelector("input").value.toUpperCase();
+            console.log(inputText)
+
+            let list = cities.filter(cityData => cityData.city.toUpperCase().includes(`${inputText}`) || cityData.state.toUpperCase().includes(`${inputText}`))
+
+
+
+
+            document.querySelector(".suggestions").innerHTML = '';
+            for (cityData of list) {
+
+                let cityState = `${cityData.city.toUpperCase()}, ${cityData.state.toUpperCase()}`
+
+                let index = cityState.indexOf(inputText)
+                let start = cityState.slice(0, index)
+                let mid = cityState.slice(index, index + (inputText.length))
+                let end = cityState.slice(index + (inputText.length))
+
+
+                let newCity = document.createElement("li")
+                newCity.innerHTML = `${start}<span class="hl">${mid}</span>${end}`;
+                console.log(newCity.children)
+                document.querySelector(".suggestions").appendChild(newCity)
+            }
+
+            if (inputText == "") {
+                document.querySelector(".suggestions").innerHTML = "";
+            }
+        }
+
+        document.querySelector("input").addEventListener('input', findList)
+
+
+    </script>
+</body>
+
+</html>
