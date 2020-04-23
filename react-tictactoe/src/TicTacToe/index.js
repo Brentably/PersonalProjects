@@ -1,66 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css'
 
 
-class TicTacToe extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            xGoes: true,
-        } 
+function TicTacToe() {
+    const [xGoes, setXGoes] = useState(true)
+    const switchTurns = () => {
+        setXGoes(prevXGoes => !prevXGoes)
     }
-    switchTurns = () => {
-        this.setState(prevState => ({xGoes: !prevState.xGoes}))
-    }
-    handleClear = () => {
-        console.log("this will clear the tic tac toe table")
+    const handleClear = () => {
+        console.log("this will clear the tic tac toe table, but currently it just refreshes the page to accomplish that")
+        // eslint-disable-next-line no-restricted-globals
+        location.reload()
     }
 
-    render() {   
-        return (
-        <div>
-            <table>
-            <tbody>
-            <tr>
-                <Square key={1} number={0} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-                <Square key={2} number={1} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-                <Square key={3} number={2} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-            </tr>
-            <tr>
-                <Square key={4} number={3} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-                <Square key={5} number={4} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-                <Square key={6} number={5} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-            </tr>
-            <tr>
-                <Square key={7} number={6} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-                <Square key={8} number={7} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-                <Square key={9} number={8} switchTurns={this.switchTurns} xGoes={this.state.xGoes} />
-            </tr>
-            </tbody>
-            </table>
-            <button onClick={this.handleClear}>Clear</button>
-        </div>
+
+    return (
+    <div>
+        <table>
+        <tbody>
+        <tr>
+            <Square key={1} number={0} switchTurns={switchTurns} xGoes={xGoes} />
+            <Square key={2} number={1} switchTurns={switchTurns} xGoes={xGoes} />
+            <Square key={3} number={2} switchTurns={switchTurns} xGoes={xGoes} />
+        </tr>
+        <tr>
+            <Square key={4} number={3} switchTurns={switchTurns} xGoes={xGoes} />
+            <Square key={5} number={4} switchTurns={switchTurns} xGoes={xGoes} />
+            <Square key={6} number={5} switchTurns={switchTurns} xGoes={xGoes} />
+        </tr>
+        <tr>
+            <Square key={7} number={6} switchTurns={switchTurns} xGoes={xGoes} />
+            <Square key={8} number={7} switchTurns={switchTurns} xGoes={xGoes} />
+            <Square key={9} number={8} switchTurns={switchTurns} xGoes={xGoes} />
+        </tr>
+        </tbody>
+        </table>
+        <button onClick={handleClear}>Clear</button>
+    </div>
+)
+
+}
+function Square(props) {
+    const [letter, setLetter] = useState("");
+    const handleClick = () => {
+        if (!letter) {
+            setLetter(props.xGoes? "X" : "O")
+            props.switchTurns()
+        }
+    }
+    return (
+        <td onClick={handleClick}>{letter}</td>
     )
-}
-}
-class Square extends TicTacToe {
-    constructor() {
-        super()
-        this.state = {
-            letter: ""
-        }
-    }
-    handleClick = () => {
-        if (!this.state.letter) {
-            this.setState({letter: this.props.xGoes? "X" : "O"})
-            this.props.switchTurns()
-        }
-    }
-    render() {
-        return (
-            <td onClick={this.handleClick}>{this.state.letter}</td>
-        )
-    }
+
 }
 
 export default TicTacToe
