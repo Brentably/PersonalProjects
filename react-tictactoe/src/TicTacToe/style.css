@@ -2,6 +2,18 @@ table {
   border-collapse: collapse;
 }
 
-table, tr, td {
+table, th, td {
   border: 1px solid black;
+}
+
+td {
+    width: 4em;
+    height: 4em;
+    text-align: center;
+}
+
+td > div {
+    width: min-content;
+    margin: auto;
+    font-size: 3em;
 }
