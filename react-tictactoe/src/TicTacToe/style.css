@@ -16,4 +16,6 @@ td > div {
     width: min-content;
     margin: auto;
     font-size: 3em;
+    cursor: default;
+    user-select: none;
 }

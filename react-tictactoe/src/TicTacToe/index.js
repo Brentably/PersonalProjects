@@ -1,24 +1,6 @@
 import React from 'react';
 import './style.css'
 
-class Square extends React.Component {
-    constructor(props){
-        super()
-        this.props = props
-        this.state = {
-            letter: ""
-        }
-        this.mark = this.mark.bind(this)
-    }
-    mark(num) {
-        console.log(num)
-    }
-    render() {
-    return (
-        <td onClick={() => this.mark(this.props.number)}><div>{this.state.letter}</div></td>
-    )
-    }
-}
 
 class TicTacToe extends React.Component {
     constructor() {
@@ -29,32 +11,60 @@ class TicTacToe extends React.Component {
         this.handleClick = this.handleClick.bind(this)
     }
     handleClick(e) {
-        const box = e.target.firstChild;
-        box.innerHTML = this.state.xGoes ? "X" : "O"
+        console.log(e.target)
         this.setState({xGoes: !this.state.xGoes})
     }
     render() {   
-    return (
-        <table onClick={this.handleClick}>
+        return (
+            <table onClick={this.handleClick}>
             <tbody>
             <tr>
-                <Square key={1} number={0} />
-                <Square key={2} number={1} />
-                <Square key={3} number={2} />
+                <Square key={1} number={0} state={this.state}/>
+                <Square key={2} number={1} state={this.state}/>
+                <Square key={3} number={2} state={this.state}/>
             </tr>
             <tr>
-                <Square key={4} number={3} />
-                <Square key={5} number={4} />
-                <Square key={6} number={5} />
+                <Square key={4} number={3} state={this.state}/>
+                <Square key={5} number={4} state={this.state}/>
+                <Square key={6} number={5} state={this.state}/>
             </tr>
             <tr>
-                <Square key={7} number={6} />
-                <Square key={8} number={7} />
-                <Square key={9} number={8} />
+                <Square key={7} number={6} state={this.state}/>
+                <Square key={8} number={7} state={this.state}/>
+                <Square key={9} number={8} state={this.state}/>
             </tr>
             </tbody>
         </table>
     )
+}
+}
+class Square extends TicTacToe {
+    constructor() {
+        super()
+        this.state = {
+            letter: ""
+        }
+        this.mark = this.mark.bind(this)
+    }
+    mark() {
+        const { xGoes } = this.props.state
+        this.setState(prevState => {
+            if (prevState.letter === "") {
+                return {
+                    letter: xGoes? "X" : "O"
+                }
+            }
+            //if there is no 
+            else {
+
+            }
+        })
+        
+    }
+    render() {
+        return (
+            <td onClick={this.mark}><div>{this.state.letter}</div></td>
+        )
     }
 }
 
