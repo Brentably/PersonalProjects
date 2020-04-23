@@ -1,5 +1,7 @@
 table {
   border-collapse: collapse;
+  table-layout: fixed;
+  margin-bottom: 1rem;
 }
 
 table, th, td {
@@ -7,15 +9,18 @@ table, th, td {
 }
 
 td {
-    width: 4em;
-    height: 4em;
-    text-align: center;
+  width: 4rem;
+  height: 4rem; 
+  text-align: center;
+  font-size: 3rem;
+  cursor: default;
+  user-select: none;
 }
 
-td > div {
-    width: min-content;
-    margin: auto;
-    font-size: 3em;
-    cursor: default;
-    user-select: none;
+
+div {
+  text-align: center;
+}
+button {
+  font-size: 2rem;
 }
