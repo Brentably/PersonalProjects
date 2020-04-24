@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 import './style.css'
 
 
-function TicTacToe() {
+const TicTacToe = () => {
     const [xGoes, setXGoes] = useState(true)
-    const switchTurns = () => {
-        setXGoes(prevXGoes => !prevXGoes)
-    }
+
+    const switchTurns = () => {setXGoes(prevXGoes => !prevXGoes)}
+
     const handleClear = () => {
         console.log("this will clear the tic tac toe table, but currently it just refreshes the page to accomplish that")
         // eslint-disable-next-line no-restricted-globals
         location.reload()
     }
 
-
+    const Squares = []
+    for (let x = 0; x < 9; x++) {
+        Squares.push(<Square key={x+1} number={x} switchTurns={switchTurns} xGoes={xGoes} />)
+    }
+    console.log(Squares)
     return (
     <div>
         <table>
@@ -40,7 +44,7 @@ function TicTacToe() {
 )
 
 }
-function Square(props) {
+const Square = (props) => {
     const [letter, setLetter] = useState("");
     const handleClick = () => {
         if (!letter) {
