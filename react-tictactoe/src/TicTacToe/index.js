@@ -4,38 +4,41 @@ import './style.css'
 
 const TicTacToe = () => {
     const [xGoes, setXGoes] = useState(true)
-
+    const [matrix, setMatrix] = useState({})
     const switchTurns = () => {setXGoes(prevXGoes => !prevXGoes)}
 
     const handleClear = () => {
-        console.log("this will clear the tic tac toe table, but currently it just refreshes the page to accomplish that")
-        // eslint-disable-next-line no-restricted-globals
-        location.reload()
+        setMatrix({})
     }
 
     const Squares = []
     for (let x = 0; x < 9; x++) {
-        Squares.push(<Square key={x+1} number={x} switchTurns={switchTurns} xGoes={xGoes} />)
+        Squares.push(<Square 
+            key={x} 
+            number={x} 
+            switchTurns={switchTurns} 
+            xGoes={xGoes} 
+            letter={matrix[`${x}`]}
+            setMatrix={setMatrix}/>)
     }
-    console.log(Squares)
     return (
     <div>
         <table>
         <tbody>
         <tr>
-            <Square key={1} number={0} switchTurns={switchTurns} xGoes={xGoes} />
-            <Square key={2} number={1} switchTurns={switchTurns} xGoes={xGoes} />
-            <Square key={3} number={2} switchTurns={switchTurns} xGoes={xGoes} />
+            {Squares[0]}
+            {Squares[1]}
+            {Squares[2]}
         </tr>
         <tr>
-            <Square key={4} number={3} switchTurns={switchTurns} xGoes={xGoes} />
-            <Square key={5} number={4} switchTurns={switchTurns} xGoes={xGoes} />
-            <Square key={6} number={5} switchTurns={switchTurns} xGoes={xGoes} />
+            {Squares[3]}
+            {Squares[4]}
+            {Squares[5]}
         </tr>
         <tr>
-            <Square key={7} number={6} switchTurns={switchTurns} xGoes={xGoes} />
-            <Square key={8} number={7} switchTurns={switchTurns} xGoes={xGoes} />
-            <Square key={9} number={8} switchTurns={switchTurns} xGoes={xGoes} />
+            {Squares[6]}
+            {Squares[7]}
+            {Squares[8]}
         </tr>
         </tbody>
         </table>
@@ -43,17 +46,17 @@ const TicTacToe = () => {
     </div>
 )
 
+
 }
 const Square = (props) => {
-    const [letter, setLetter] = useState("");
     const handleClick = () => {
-        if (!letter) {
-            setLetter(props.xGoes? "X" : "O")
+        if (!props.letter) {
+            props.setMatrix(prevMatrix => ({...prevMatrix, [`${props.number}`]: props.xGoes? "X" : "O"}))
             props.switchTurns()
         }
     }
     return (
-        <td onClick={handleClick}>{letter}</td>
+        <td onClick={handleClick}>{props.letter}</td>
     )
 
 }
