@@ -49,12 +49,14 @@ tableArray.push(arrayRow)
 
 //the following code toggles the selected class when clicked
 function toggleSelected(e) {
-    this.classList.toggle("selected")
-    console.log(this)
+    if (e.target.localName !== "td") return
+    const td = e.target
+    td.classList.toggle("selected")
     
  }
+const tbody = document.querySelector("tbody")
+tbody.addEventListener('click', toggleSelected)
 
-
-const boxes = document.querySelectorAll("td")
-// console.log(boxes)
-boxes.forEach(box => {box.addEventListener('click', toggleSelected)})
+// const boxes = document.querySelectorAll("td")
+// // console.log(boxes)
+// boxes.forEach(box => {box.addEventListener('click', toggleSelected)})
