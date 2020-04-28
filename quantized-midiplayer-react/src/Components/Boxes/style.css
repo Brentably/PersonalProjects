@@ -1,5 +1,10 @@
 .box {
-  width: 10px;
-  height: 10px;
-  background-color: red;
+  background-color: rgba(128, 128, 128, 0.8);
+  border-radius: 10%;
+  border: 0.4px solid black;
+}
+
+.snake {
+    background-color: khaki;
+    border: none;
 }

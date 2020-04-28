@@ -1,12 +1,11 @@
 import React from 'react';
-import renderBoxes from './Components/Boxes/boxes'
+import Boxes from './Components/Boxes/boxes'
 import './App.css';
 
-function App() {
-
+const App = () => {
   return (
     <div className="container">
-      {renderBoxes(10)}
+      <Boxes rows={30} />
     </div>
   );
 }

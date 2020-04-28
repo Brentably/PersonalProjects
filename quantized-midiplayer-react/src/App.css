@@ -7,7 +7,13 @@ body {
 }
 
 .container {
-  background-color: grey;
+  background-color: rgb(51, 0, 0);
+  border: 1px solid red;
   display: grid;
+  width: 50em;
+  height: 50em;
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: repeat(30, 1fr);
+  /* I do NOT want to hard code this in the future ^^^^ */
 }
 
