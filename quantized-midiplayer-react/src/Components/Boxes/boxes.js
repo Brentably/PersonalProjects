@@ -5,6 +5,31 @@ function Boxes(props) {
     const num = props.size
     const [snake, setSnake] = useState([15, 15])
     const [direction, setDirection] = useState("init")
+    
+    
+    const changeDirection = () => {
+        // clearInterval(id)
+        // const id = setInterval(() => {
+        //     switch (direction) {
+        //         case "right":
+        //             setSnake(prevSnake => [prevSnake[0] + 1, prevSnake[1]]);
+        //             break;
+        //         case "left":
+        //             setSnake(prevSnake => [prevSnake[0] - 1, prevSnake[1]]);
+        //             break;
+        //         case "up":
+        //             setSnake(prevSnake => [prevSnake[0], prevSnake[1] - 1]);
+        //             break;
+        //         case "down":
+        //             setSnake(prevSnake => [prevSnake[0], prevSnake[1] + 1]);
+        //             break;
+        //         default:
+        //             console.log("error")
+        //     }
+        // }, 200)
+        console.log(direction)
+    }
+    
     const handleKeyDown = (e) => {
         if (!e.key.startsWith("Arrow")) return
         console.log(e.key)
@@ -24,32 +49,14 @@ function Boxes(props) {
             default:
                 console.log("error")
         }
-        console.log(direction)
+        changeDirection()
     }
-    // eslint-disable-next-line 
-    useEffect(() => document.addEventListener('keydown', handleKeyDown), [])
+    //eslint-disable-next-line
+    // useEffect(() => document.addEventListener('keydown', handleKeyDown), [])
     
-    useEffect(() => {
-        const id = setInterval(() => {
-        switch(direction) {
-            case "right": 
-            setSnake(prevSnake => [prevSnake[0] + 1, prevSnake[1]]);
-            break;
-            case "left": 
-            setSnake(prevSnake => [prevSnake[0] - 1, prevSnake[1]]);
-            break;
-            case "up": 
-            setSnake(prevSnake => [prevSnake[0], prevSnake[1] - 1]);
-            break;
-            case "down": 
-            setSnake(prevSnake => [prevSnake[0], prevSnake[1] + 1]);
-            break;
-            default:
-                console.log("error")
-            }}, 200)    
-        return clearInterval(id)
-        }, [direction]
-    )
+    document.addEventListener('keydown', handleKeyDown)
+    
+
 
     const rows = []
     for (let y = 0; y < num; y++) {
