@@ -4,32 +4,32 @@ import "./style.css"
 function Boxes(props) {
     const num = props.size
     const [snake, setSnake] = useState([15, 15])
-    const [direction, setDirection] = useState("init")
+    const [direction, setDirection] = useState(null)
     
     
-    const changeDirection = () => {
-        // clearInterval(id)
-        // const id = setInterval(() => {
-        //     switch (direction) {
-        //         case "right":
-        //             setSnake(prevSnake => [prevSnake[0] + 1, prevSnake[1]]);
-        //             break;
-        //         case "left":
-        //             setSnake(prevSnake => [prevSnake[0] - 1, prevSnake[1]]);
-        //             break;
-        //         case "up":
-        //             setSnake(prevSnake => [prevSnake[0], prevSnake[1] - 1]);
-        //             break;
-        //         case "down":
-        //             setSnake(prevSnake => [prevSnake[0], prevSnake[1] + 1]);
-        //             break;
-        //         default:
-        //             console.log("error")
-        //     }
-        // }, 200)
-        console.log(direction)
-    }
-    
+    useEffect(() => {
+        if (!direction) return;
+        const id = setInterval(() => {
+            switch (direction) {
+                case "right":
+                    setSnake(prevSnake => [prevSnake[0] + 1, prevSnake[1]]);
+                    break;
+                case "left":
+                    setSnake(prevSnake => [prevSnake[0] - 1, prevSnake[1]]);
+                    break;
+                case "up":
+                    setSnake(prevSnake => [prevSnake[0], prevSnake[1] - 1]);
+                    break;
+                case "down":
+                    setSnake(prevSnake => [prevSnake[0], prevSnake[1] + 1]);
+                    break;
+                default:
+                    console.log("error")
+            }
+        }, 100)
+        return (() => clearInterval(id))
+    }, [direction])
+
     const handleKeyDown = (e) => {
         if (!e.key.startsWith("Arrow")) return
         console.log(e.key)
@@ -49,21 +49,20 @@ function Boxes(props) {
             default:
                 console.log("error")
         }
-        changeDirection()
     }
-    //eslint-disable-next-line
-    // useEffect(() => document.addEventListener('keydown', handleKeyDown), [])
-    
-    document.addEventListener('keydown', handleKeyDown)
-    
 
-
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyDown);
+        return (() => document.removeEventListener('keydown', handleKeyDown))
+    }, [])
+        
+        
     const rows = []
     for (let y = 0; y < num; y++) {
         const eachRow = []
         for (let x = 0; x < num; x++) {
             let box;
-            if (x === snake[0] & y === snake[1]) {
+            if (x === snake[0] && y === snake[1]) {
                 box = <td key={x} id={x} className="snake"></td>
             }
             else {
