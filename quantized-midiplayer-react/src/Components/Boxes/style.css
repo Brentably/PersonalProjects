@@ -1,4 +1,11 @@
-.box {
+table {
+    width: 30em;
+    height: 30em;
+    background-color: rgb(80, 40, 40);
+    border-collapse: collapse;
+}
+
+td {
   background-color: rgba(128, 128, 128, 0.8);
   border-radius: 10%;
   border: 0.4px solid black;
@@ -7,4 +14,10 @@
 .snake {
     background-color: khaki;
     border: none;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

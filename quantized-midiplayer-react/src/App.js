@@ -4,9 +4,8 @@ import './App.css';
 
 const App = () => {
   return (
-    <div className="container">
-      <Boxes rows={30} />
-    </div>
+      <Boxes size={30} />
+      
   );
 }
 

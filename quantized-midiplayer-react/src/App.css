@@ -6,7 +6,7 @@ body {
   background-color: rgb(58, 58, 58);
 }
 
-.container {
+/* .container {
   background-color: rgb(51, 0, 0);
   border: 1px solid red;
   display: grid;
@@ -15,5 +15,5 @@ body {
   grid-template-columns: repeat(30, 1fr);
   grid-template-rows: repeat(30, 1fr);
   /* I do NOT want to hard code this in the future ^^^^ */
-}
+
 
