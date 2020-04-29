@@ -4,11 +4,10 @@ import "./style.css"
 function Boxes(props) {
     const num = props.size
     const [snake, setSnake] = useState([15, 15])
-    const [direction, setDirection] = useState("down")
+    const [direction, setDirection] = useState("init")
     const handleKeyDown = (e) => {
         if (!e.key.startsWith("Arrow")) return
         console.log(e.key)
-        debugger;
         switch(e.key) {
             case "ArrowRight":
             setDirection("right");
@@ -27,14 +26,11 @@ function Boxes(props) {
         }
         console.log(direction)
     }
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown)
-        return clearInterval()
-    })
+    // eslint-disable-next-line 
+    useEffect(() => document.addEventListener('keydown', handleKeyDown), [])
     
-    const handleStart = () => {
-        setInterval(() => {
-            debugger;
+    useEffect(() => {
+        const id = setInterval(() => {
         switch(direction) {
             case "right": 
             setSnake(prevSnake => [prevSnake[0] + 1, prevSnake[1]]);
@@ -50,8 +46,10 @@ function Boxes(props) {
             break;
             default:
                 console.log("error")
-        }}, 200)
-    }
+            }}, 200)    
+        return clearInterval(id)
+        }, [direction]
+    )
 
     const rows = []
     for (let y = 0; y < num; y++) {
@@ -75,7 +73,6 @@ return (
   <table>
     <tbody>{rows}</tbody>
   </table>
-  <button onClick={handleStart}>Start</button>
 </div>
 )
 }
