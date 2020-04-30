@@ -3,50 +3,51 @@ import Grid from "../Grid/Grid"
 import "./style.css"
 
 function SnakeGame() {
-  const gridSize = 30;
+  const gridSize = 35
   // the first value is supposed to be the snake's head, the rest are it's sequential tail, so... when it moves one block, the first array of snake moves in that direction, and then the rest become the value of the array in front of
-  const [snake, setSnake] = useState([[15, 15], [14, 15], [13, 15], [12, 15]])
+  const [snake, setSnake] = useState([
+    [15, 15],
+    [14, 15],
+    [13, 15],
+    [12, 15],
+  ])
   const [direction, setDirection] = useState(null)
   const [lost, setLost] = useState(false)
 
-  //the following makes the snake go in the direction of state direction
+  //the following makes the snake go in the direction of state direction, creating a new array based on the current snake and setting state to the new snake
   useEffect(() => {
     if (!direction) return
     const id = setInterval(() => {
       switch (direction) {
-          case "Right":
+        case "Right":
           setSnake((prevSnake) => {
-            let snakeCopy = [...prevSnake]
+            const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0] + 1, prevSnake[0][1]])
             snakeCopy.pop()
-            console.log(snakeCopy)
             return snakeCopy
           })
-          break;
-          case "Left":
+          break
+        case "Left":
           setSnake((prevSnake) => {
-            let snakeCopy = [...prevSnake]
+            const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0] - 1, prevSnake[0][1]])
             snakeCopy.pop()
-            console.log(snakeCopy)
             return snakeCopy
           })
           break
         case "Up":
           setSnake((prevSnake) => {
-            let snakeCopy = [...prevSnake]
+            const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0], prevSnake[0][1] - 1])
             snakeCopy.pop()
-            console.log(snakeCopy)
             return snakeCopy
           })
           break
         case "Down":
           setSnake((prevSnake) => {
-            let snakeCopy = [...prevSnake]
+            const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0], prevSnake[0][1] + 1])
             snakeCopy.pop()
-            console.log(snakeCopy)
             return snakeCopy
           })
           break
@@ -56,7 +57,7 @@ function SnakeGame() {
     }, 100)
     return () => clearInterval(id)
   }, [direction])
-// sets state direction to the direction of the key pressed
+  // sets state direction to the direction of the key pressed
   const handleKeyDown = (e) => {
     setLost(false)
     if (!e.key.startsWith("Arrow")) return
@@ -66,16 +67,20 @@ function SnakeGame() {
     // add new code in the future that makes it so you can't go backwards, so the snake can't run into himself just by going backwards
   }
 
-// adds keydown event listener
+  // adds keydown event listener
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
   }, [])
 
   const lostFunction = () => {
-    console.log("you lost")
     setDirection(null)
-    setSnake([[15, 15], [14, 15], [13, 15], [12, 15]])
+    setSnake([
+      [15, 15],
+      [14, 15],
+      [13, 15],
+      [12, 15],
+    ])
     setLost(true)
   }
 
