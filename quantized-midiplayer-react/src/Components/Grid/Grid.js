@@ -8,7 +8,12 @@ const Grid = (props) => {
     const eachRow = []
     for (let x = 0; x < size; x++) {
     let box
-    if (x === snake[0] && y === snake[1]) {
+    // if (x === snake[0] && y === snake[1]) {
+    // box = <td key={x} id={x} className="snake"></td>
+    // } else {
+    // box = <td key={x} id={x}></td>
+    // }
+    if (snake.some(block => block[0] === x && block[1] === y)) {
     box = <td key={x} id={x} className="snake"></td>
     } else {
     box = <td key={x} id={x}></td>

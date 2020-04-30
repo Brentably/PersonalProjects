@@ -18,5 +18,5 @@ td {
 
 .snake {
     background-color: khaki;
-    border: none;
+    border: 0.4px solid rgb(110, 106, 64);
 }

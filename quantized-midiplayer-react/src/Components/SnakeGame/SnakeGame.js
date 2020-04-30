@@ -4,7 +4,8 @@ import "./style.css"
 
 function SnakeGame() {
   const gridSize = 30;
-  const [snake, setSnake] = useState([15, 15])
+  // the first value is supposed to be the snake's head, the rest are it's sequential tail, so... when it moves one block, the first array of snake moves in that direction, and then the rest become the value of the array in front of
+  const [snake, setSnake] = useState([[15, 15], [14, 15], [13, 15], [12, 15]])
   const [direction, setDirection] = useState(null)
   const [lost, setLost] = useState(false)
 
@@ -14,16 +15,40 @@ function SnakeGame() {
     const id = setInterval(() => {
       switch (direction) {
           case "Right":
-          setSnake((prevSnake) => [prevSnake[0] + 1, prevSnake[1]])
-          break
+          setSnake((prevSnake) => {
+            let snakeCopy = [...prevSnake]
+            snakeCopy.unshift([prevSnake[0][0] + 1, prevSnake[0][1]])
+            snakeCopy.pop()
+            console.log(snakeCopy)
+            return snakeCopy
+          })
+          break;
           case "Left":
-          setSnake((prevSnake) => [prevSnake[0] - 1, prevSnake[1]])
+          setSnake((prevSnake) => {
+            let snakeCopy = [...prevSnake]
+            snakeCopy.unshift([prevSnake[0][0] - 1, prevSnake[0][1]])
+            snakeCopy.pop()
+            console.log(snakeCopy)
+            return snakeCopy
+          })
           break
         case "Up":
-          setSnake((prevSnake) => [prevSnake[0], prevSnake[1] - 1])
+          setSnake((prevSnake) => {
+            let snakeCopy = [...prevSnake]
+            snakeCopy.unshift([prevSnake[0][0], prevSnake[0][1] - 1])
+            snakeCopy.pop()
+            console.log(snakeCopy)
+            return snakeCopy
+          })
           break
         case "Down":
-          setSnake((prevSnake) => [prevSnake[0], prevSnake[1] + 1])
+          setSnake((prevSnake) => {
+            let snakeCopy = [...prevSnake]
+            snakeCopy.unshift([prevSnake[0][0], prevSnake[0][1] + 1])
+            snakeCopy.pop()
+            console.log(snakeCopy)
+            return snakeCopy
+          })
           break
         default:
           console.log("error")
@@ -50,11 +75,11 @@ function SnakeGame() {
   const lostFunction = () => {
     console.log("you lost")
     setDirection(null)
-    setSnake([15, 15])
+    setSnake([[15, 15], [14, 15], [13, 15], [12, 15]])
     setLost(true)
   }
 
-  if (snake[0] < 0 || snake[0] >= gridSize || snake[1] < 0 || snake[1] >= gridSize) lostFunction()
+  if (snake[0][0] < 0 || snake[0][0] >= gridSize || snake[0][1] < 0 || snake[0][1] >= gridSize) lostFunction()
 
   return (
     <div>
