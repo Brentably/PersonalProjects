@@ -1,4 +1,5 @@
-import React from './node_modules/react';
+import React from 'react';
+import './style.css'
 
 const Grid = (props) => {
     const { size, snake } = props

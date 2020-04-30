@@ -4,8 +4,7 @@ import SnakeGame from './Components/SnakeGame/SnakeGame';
 
 const App = () => {
   return (
-      <SnakeGame size={30} />
-      
+      <SnakeGame />
   );
 }
 

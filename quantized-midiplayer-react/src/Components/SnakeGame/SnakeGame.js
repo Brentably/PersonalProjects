@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react"
 import Grid from "../Grid/Grid"
 import "./style.css"
 
-function SnakeGame(props) {
-  const { size } = props
+function SnakeGame() {
+  const gridSize = 30;
   const [snake, setSnake] = useState([15, 15])
   const [direction, setDirection] = useState(null)
   const [lost, setLost] = useState(false)
 
-  //the following makes the block go in the direction of direction
+  //the following makes the snake go in the direction of state direction
   useEffect(() => {
     if (!direction) return
     const id = setInterval(() => {
@@ -38,6 +38,7 @@ function SnakeGame(props) {
     const dir = e.key.substring(5)
     console.log(dir)
     setDirection(dir)
+    // add new code in the future that makes it so you can't go backwards, so the snake can't run into himself just by going backwards
   }
 
 // adds keydown event listener
@@ -53,11 +54,11 @@ function SnakeGame(props) {
     setLost(true)
   }
 
-  if (snake[0] < 0 || snake[0] >= size || snake[1] < 0 || snake[1] >= size) lostFunction()
+  if (snake[0] < 0 || snake[0] >= gridSize || snake[1] < 0 || snake[1] >= gridSize) lostFunction()
 
   return (
     <div>
-      <Grid size={props.size} snake={snake} />
+      <Grid size={gridSize} snake={snake} />
       <h3 style={{ display: lost ? "block" : "none" }}>You lost :( Press any key to play again</h3>
     </div>
   )
