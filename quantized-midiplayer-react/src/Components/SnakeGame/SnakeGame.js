@@ -13,6 +13,8 @@ function SnakeGame() {
   ])
   const [direction, setDirection] = useState(null)
   const [lost, setLost] = useState(false)
+  //lastbox is set to the value of the butt every time the snake moves a square... hopefully we 
+  let lastBox;
 
   //the following makes the snake go in the direction of state direction, creating a new array based on the current snake and setting state to the new snake
   useEffect(() => {
@@ -23,7 +25,7 @@ function SnakeGame() {
           setSnake((prevSnake) => {
             const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0] + 1, prevSnake[0][1]])
-            snakeCopy.pop()
+            let lastBox = snakeCopy.pop()
             return snakeCopy
           })
           break
@@ -31,7 +33,7 @@ function SnakeGame() {
           setSnake((prevSnake) => {
             const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0] - 1, prevSnake[0][1]])
-            snakeCopy.pop()
+            let lastBox = snakeCopy.pop()
             return snakeCopy
           })
           break
@@ -39,7 +41,7 @@ function SnakeGame() {
           setSnake((prevSnake) => {
             const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0], prevSnake[0][1] - 1])
-            snakeCopy.pop()
+            let lastBox = snakeCopy.pop()
             return snakeCopy
           })
           break
@@ -47,7 +49,7 @@ function SnakeGame() {
           setSnake((prevSnake) => {
             const snakeCopy = [...prevSnake]
             snakeCopy.unshift([prevSnake[0][0], prevSnake[0][1] + 1])
-            snakeCopy.pop()
+            let lastBox = snakeCopy.pop()
             return snakeCopy
           })
           break
@@ -63,15 +65,18 @@ function SnakeGame() {
     if (!e.key.startsWith("Arrow")) return
     const dir = e.key.substring(5)
     console.log(dir)
+    console.log(direction)
+    // if (direction !== dir) 
     setDirection(dir)
     // add new code in the future that makes it so you can't go backwards, so the snake can't run into himself just by going backwards
+
   }
 
   // adds keydown event listener
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [])
+  }, [direction])
 
   const lostFunction = () => {
     setDirection(null)
