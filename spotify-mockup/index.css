@@ -1,21 +1,5 @@
-body {
-    background-color: rgb(68, 68, 68);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+@tailwind base;
 
-form {
-    background-color: rgb(41, 41, 41);
-    padding: 3em;
-    border-radius: 1em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
+@tailwind components;
 
-input {
-    margin: 1em auto;
-
-}
+@tailwind utilities;
