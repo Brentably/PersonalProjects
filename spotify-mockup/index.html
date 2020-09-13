@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Playlist Maker</title>
     <link rel="stylesheet" href="./index.css" />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-800" >
-    <form id="login">
-        <input type="text" id="username" />
-        <input type="text" id="password" />
+<body class="h-screen bg-gray-900 flex justify-center items-center">
+    <form id="login" class="bg-black flex flex-col p-2 rounded-lg">
+        <input type="text" id="username" class="my-5"/>
+        <input type="text" id="password" class="my-5"/>
     </form>
 </body>
 </html>
