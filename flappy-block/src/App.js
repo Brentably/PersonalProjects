@@ -9,7 +9,7 @@ function App() {
   const [playerLocation, setPlayerLocation] = useState([1, 1])
   const [special, setSpecial] = useState([[-30, 41]])
   
-  
+  // sets the players location to whatever block the mouse is hovering over
   const handlePlayerLocation = (event) => {
     if (!event.target.id) return
     let idString = event.target.id
@@ -25,22 +25,30 @@ function App() {
   const startGame = () => {
     setGameGoing(true)
     setLostGame(false)
-    id = setInterval(() => {
-      nextStep()
-    }, int);
+    id = setInterval(nextStep, int);
   }
   
   useEffect(() => {
-    if(lostGame) clearInterval(id)
-  })
+    console.log(special)
+    if(special.includes(playerLocation)) {
+      setLostGame(true)
+      setGameGoing(false)
+      clearInterval(id)
+      console.log('hey')
+    }
+  }, [special, playerLocation, id])
+  
+
+  
+  
   
   // steps the game along
-
+  
   let i = 0
   const nextStep = () => {
     if (lostGame) return
     i++
-
+    
     // steps a two dimensional array
     const step = (twoDArr) => {
       return twoDArr.map(arr => {
@@ -51,7 +59,7 @@ function App() {
 
     // adds a new row of blocks (called a "special") after every i steps,
     // otherwise just steps the game along
-    if (i == 4) {
+    if (i === 4) {
       const generateNewSpecial = () => {
         const getRandomInt = (max) => {
           return Math.floor(Math.random() * Math.floor(max));
@@ -62,7 +70,7 @@ function App() {
           if (a < newSpecialVal || a >= newSpecialVal + 6)
           newSpecialSet.push([a, 0])
         }
-        console.log(newSpecialSet)
+        // console.log(newSpecialSet)
         return newSpecialSet
       }
 
@@ -78,7 +86,7 @@ function App() {
         return [...step(prevSpecial)]
       })
     }
-    console.log("step")
+    // console.log("step")
   }
   
   
