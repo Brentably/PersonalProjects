@@ -1,0 +1,26 @@
+table {
+    width: 100vh;
+    height: 100vh;
+    /* border-collapse: collapse; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+td {
+  background-color: rgba(128, 128, 128, 0.5);
+  border: 0.4px solid black;
+  margin: 10px;
+}
+
+.player {
+    background-color: white;
+    border: 0.4px solid rgb(110, 106, 64);
+}
+
+.special {
+    background-color: rgb(141, 129, 255);
+    border: 0.4px solid rgb(110, 106, 64);
+}
