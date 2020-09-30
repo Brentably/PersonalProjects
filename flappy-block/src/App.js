@@ -9,6 +9,12 @@ function App() {
   const [playerLocation, setPlayerLocation] = useState([1, 1])
   const [special, setSpecial] = useState([[-30, 41]])
   
+
+
+//Hello brent from the future! You have a few bugs to deal with today. First of all I'd like to point out that the step function is not working completely properly, it will jump a beat after every few steps or so. Next I'd like to point out that you never remove the specials from the specials array when they go off screen. Which isn't bad at first but will become a problem later on. Our chief problem though seems to be that the code is not properly detecting when the player hits one of the specials, which should end the game. IDFK  what to do, but YOU, YYOOUUU are wiser and smarter then me. and I believe Aang can save the world Doooo doo doo dooo
+
+
+
   // sets the players location to whatever block the mouse is hovering over
   const handlePlayerLocation = (event) => {
     if (!event.target.id) return
