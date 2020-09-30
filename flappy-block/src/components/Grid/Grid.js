@@ -13,11 +13,11 @@ const Grid = (props) => {
     for (let x = 0; x < xSize; x++) {
     let box
     if (special && special.some(block => block[0] === x && block[1] === y)) {
-    box = <td key={x} id={x} className="special"></td>
+    box = <td key={[x, y]} id={[x, y]} className="special"></td>
     } else if (playerLocation && playerLocation[0] === x && playerLocation[1] === y) {
-    box = <td key={x} id={x} className="player"></td>
+    box = <td key={[x, y]} id={[x, y]} className="player"></td>
     } else {
-    box = <td key={x} id={x}></td>
+    box = <td key={[x, y]} id={[x, y]}></td>
     }
     eachRow.push(box)
     }
