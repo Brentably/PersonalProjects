@@ -4,11 +4,12 @@ import './App.css';
 
 function App() {
   const [gameGoing, setGameGoing] = useState(false)
+  const [lostGame, setLostGame] = useState(false)
   const [int, setInt] = useState(500)
   const [playerLocation, setPlayerLocation] = useState([1, 1])
   const [special, setSpecial] = useState([[-30, 41]])
   
-
+  
   const handlePlayerLocation = (event) => {
     if (!event.target.id) return
     let idString = event.target.id
@@ -17,11 +18,23 @@ function App() {
     // console.log(id)
     setPlayerLocation(id)
   }
-
-
-
+  
+  let id
+  const startGame = () => {
+    setGameGoing(true)
+    setLostGame(false)
+    id = setInterval(() => {
+      nextStep()
+    }, int);
+  }
+  
+  useEffect(() => {
+    if(lostGame) clearInterval(id)
+  })
+  
   let i = 0
   const nextStep = () => {
+    if (lostGame) return
     i++
 
     // steps a two dimensional array
@@ -61,13 +74,7 @@ function App() {
     }
     console.log("step")
   }
-
-  const startGame = () => {
-    setGameGoing(true)
-    let id = setInterval(() => {
-      nextStep()
-    }, int);
-  }
+  
   
 
   return (
