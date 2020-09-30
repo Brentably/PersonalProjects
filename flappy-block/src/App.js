@@ -19,6 +19,8 @@ function App() {
     setPlayerLocation(id)
   }
   
+  // deals with starting and stopping the game
+
   let id
   const startGame = () => {
     setGameGoing(true)
@@ -32,6 +34,8 @@ function App() {
     if(lostGame) clearInterval(id)
   })
   
+  // steps the game along
+
   let i = 0
   const nextStep = () => {
     if (lostGame) return
@@ -45,6 +49,8 @@ function App() {
       })
     }
 
+    // adds a new row of blocks (called a "special") after every i steps,
+    // otherwise just steps the game along
     if (i == 4) {
       const generateNewSpecial = () => {
         const getRandomInt = (max) => {
@@ -80,7 +86,8 @@ function App() {
   return (
     <div onMouseOverCapture={handlePlayerLocation}>
     <Grid xSize={18} ySize={18} playerLocation={playerLocation} special={special} />
-    <div className="start" style={gameGoing? {display: "none", cursor: "none"} : {display: "block"}} onClick={startGame}>click here to start</div>
+    <div className="start" style={gameGoing && !lostGame ? {display: "none", cursor: "none"} : {display: "block"}} onClick={startGame}>click here to start</div>
+    <div className="start" style={(!lostGame) ? {display: "none", cursor: "none"} : {display: "block"}} onClick={startGame}>You Lost (click to play again)</div>
     </div>
   );
 }
