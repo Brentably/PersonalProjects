@@ -10,7 +10,7 @@ function App() {
   const [playerLocation, setPlayerLocation] = useState([1, 1])
   const [special, setSpecial] = useState([[-1, -1]])
   const [score, setScore] = useState(null)
-  const [counter, setCounter] = useState(0)
+  
   
   
   //Hello brent from the future! You have a few bugs to deal with today. 
@@ -53,8 +53,9 @@ function App() {
   useEffect(() => {
     if (int === 500) return
     clearInterval(intId)
+    i=2
     setIntId(setInterval(nextStep, int))
-  }, [int, intId, nextStep])
+  }, [int])
 
   
   // sets the players location to whatever block the mouse is hovering over
@@ -107,8 +108,9 @@ function App() {
   }
 
 // steps the game along
+  let i = 3
   const nextStep = () => {
-    setCounter((prevCounter) => prevCounter + 1)
+    i++
     // adds a new row of blocks (called a "special") after every i steps,
     // otherwise just steps the game along
     
@@ -116,14 +118,12 @@ function App() {
       return step([...prevSpecial]).filter((arr) => (arr[0] <= 18 && arr[1] <= 18))
     })
     
-    if (counter === 4) {
+    if (i === 4) {
+      i = 0
       setSpecial((prevSpecial) => {
         return [...prevSpecial].concat(generateNewSpecial())
       })
-      setCounter(0)
     } 
-  
-    
     // console.log("step")
   }
   
