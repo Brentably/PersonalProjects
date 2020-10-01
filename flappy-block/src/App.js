@@ -137,7 +137,7 @@ function App() {
     <div className="start" style={!gameGoing && !lostGame ? {display: "block"} : {display: "none", cursor: "none"}} onClick={startGame}>click here to start</div>
     <div className="start" style={(!lostGame) ? {display: "none", cursor: "none"} : {display: "block"}} onClick={startGame}>You Lost <br />click to play again</div>
     {/* below is a button I added for testing */}
-    <button onClick={nextStep} style={{position: "absolute", top: "10px", left: "10px"}}>FUCKING CLICK ME</button>
+    {/* <button onClick={nextStep} style={{position: "absolute", top: "10px", left: "10px"}}>FUCKING CLICK ME</button> */}
     </div>
   );
 }
