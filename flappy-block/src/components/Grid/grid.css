@@ -31,3 +31,13 @@ td {
     height: 100vw
   }
 }
+
+.score {
+  font-size: 5rem;
+  text-transform: uppercase;  
+  font-family: 'Courier Prime';
+  font-weight: bold;
+  text-align: center;
+  text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
+  z-index: 2;
+}

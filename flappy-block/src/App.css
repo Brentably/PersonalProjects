@@ -34,3 +34,8 @@ div {
   cursor: pointer;
 }
 
+
+
+@media (max-aspect-ratio: 1/1) {
+  
+}

@@ -4,7 +4,7 @@ import './grid.css'
 const Grid = (props) => {
     //xSize and ySize should be whole numbers and special is an array of coordinate arrays that you can add a class to (for example to highlight a snake on the board)
     //I've also added player location for this specific use case because I want a player at just one single coordinate. The code isn't too hard to parse, so it should make sense
-    const { xSize, ySize, special, playerLocation } = props
+    const { xSize, ySize, special, playerLocation, score } = props
     const rows = []
 
 
@@ -28,9 +28,12 @@ const Grid = (props) => {
     )}
 
     return (
+        <>
+        <div className="score" style={{display: score ? "block" : "none" }}>{score}</div>
         <table>
             <tbody>{rows}</tbody>
         </table>
+        </>
     )
 }
 
