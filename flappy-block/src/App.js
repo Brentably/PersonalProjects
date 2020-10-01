@@ -44,8 +44,8 @@ function App() {
   // sets the new interval based on the score
   useEffect(() => {
     if (!score) return
-    if (score % 5 !== 0) return
-    setInt((prevInt) => prevInt * 0.9)
+    // if (score % 5 !== 0) return
+    setInt((prevInt) => prevInt * 0.98)
     
   }, [score])
   
