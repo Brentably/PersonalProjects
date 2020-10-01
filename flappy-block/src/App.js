@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   const [gameGoing, setGameGoing] = useState(false)
   const [lostGame, setLostGame] = useState(false)
-  const [int, setInt] = useState(500)
+  const [int/*, setInt*/] = useState(500)
   const [intId, setIntId] = useState(null)
   const [playerLocation, setPlayerLocation] = useState([1, 1])
   const [special, setSpecial] = useState([[-1, -1]])
@@ -31,7 +31,7 @@ function App() {
     let idString = event.target.id
     let id = idString.split(",")
     id = id.map(coord => parseInt(coord))
-    // console.log(id)
+    console.log(id)
     setPlayerLocation(id)
   }
   
@@ -50,6 +50,7 @@ function App() {
     // console.log(special)
     // console.log(playerLocation)
     // the following confusing if statement just checks if the special array contains an array equivalent to the playerLocation
+    // in other words the player hit a wall
     if(special.some((arr) => (arr[0] === playerLocation[0] && arr[1] === playerLocation[1]))) {
       setLostGame(true)
       setGameGoing(false)
@@ -58,53 +59,55 @@ function App() {
     }
   }, [special, playerLocation, intId])
   
-  useEffect(() => {
-    console.log(special)
-  }, [special])
-  
+  // useEffect(() => {
+  //   debugger;
+  // }, [special])
   
   
   // steps the game along
   
+  // steps a two dimensional array
+  const step = (twoDArr) => {
+    return twoDArr.map(arr => {
+      arr[1] += 1
+      return arr
+    })
+  }
+
+  //generates a new wall of coordinates to be pushed to the special array
+  const generateNewSpecial = () => {
+    const getRandomInt = (max) => {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+    let newSpecialVal = getRandomInt(11)
+    let newSpecialSet = []
+    for (let a = 0; a <= 17; a++) {
+      if (a < newSpecialVal || a >= newSpecialVal + 6)
+      newSpecialSet.push([a, 0])
+    }
+    // console.log(newSpecialSet)
+    return newSpecialSet
+  }
+
+
   let i = 0
   const nextStep = () => {
     // if (lostGame) return
     i++
     
-    // steps a two dimensional array
-    const step = (twoDArr) => {
-      return twoDArr.map(arr => {
-        arr[1] += 1
-        return arr
-      })
-    }
-
     // adds a new row of blocks (called a "special") after every i steps,
     // otherwise just steps the game along
     if (i === 4) {
-      const generateNewSpecial = () => {
-        const getRandomInt = (max) => {
-          return Math.floor(Math.random() * Math.floor(max));
-        }
-        let newSpecialVal = getRandomInt(11)
-        let newSpecialSet = []
-        for (let a = 0; a < 18; a ++) {
-          if (a < newSpecialVal || a >= newSpecialVal + 6)
-          newSpecialSet.push([a, 0])
-        }
-        // console.log(newSpecialSet)
-        return newSpecialSet
-      }
 
       let newSpecial = generateNewSpecial()
       setSpecial((prevSpecial) => {
-        return [...step(prevSpecial)].concat(newSpecial).filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
+        return step(prevSpecial).concat(newSpecial).filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
       })
 
       i = 0
     } else {
       setSpecial((prevSpecial) => {
-        return [...step(prevSpecial)].filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
+        return step(prevSpecial).filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
       })
     }
     console.log("step")
