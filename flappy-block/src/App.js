@@ -67,10 +67,14 @@ function App() {
   // steps the game along
   
   // steps a two dimensional array
+
+
+  // I think I'm on to something. I just figured out that this step function is actually changing the input array, not just returning a new one
   const step = (twoDArr) => {
     return twoDArr.map(arr => {
-      arr[1] += 1
-      return arr
+      let newArr = [...arr]
+      newArr[1] += 1
+      return newArr
     })
   }
 
@@ -93,34 +97,37 @@ function App() {
   let i = 0
   const nextStep = () => {
     // if (lostGame) return
+
     i++
     
     // adds a new row of blocks (called a "special") after every i steps,
     // otherwise just steps the game along
+
+    setSpecial((prevSpecial) => {
+      return step([...prevSpecial]).filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
+  })
+    
     if (i === 4) {
-
-      let newSpecial = generateNewSpecial()
       setSpecial((prevSpecial) => {
-        return step(prevSpecial).concat(newSpecial).filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
+        return prevSpecial.concat(generateNewSpecial())
       })
-
       i = 0
-    } else {
-      setSpecial((prevSpecial) => {
-        return step(prevSpecial).filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
-      })
-    }
+    } 
     console.log("step")
   }
   
   
 
   return (
+    <>
     <div onMouseOverCapture={handlePlayerLocation}>
     <Grid xSize={18} ySize={18} playerLocation={playerLocation} special={special} />
     <div className="start" style={!gameGoing && !lostGame ? {display: "block"} : {display: "none", cursor: "none"}} onClick={startGame}>click here to start</div>
     <div className="start" style={(!lostGame) ? {display: "none", cursor: "none"} : {display: "block"}} onClick={startGame}>You Lost (click to play again)</div>
     </div>
+    {/* below is a button I added for testing */}
+    {/* <button onClick={nextStep} style={{position: "absolute", top: "10px", left: "10px"}}>FUCKING CLICK ME</button> */}
+    </>
   );
 }
 
