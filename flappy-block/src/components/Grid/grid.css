@@ -24,3 +24,10 @@ td {
     background-color: rgb(141, 129, 255);
     border: 0.4px solid rgb(110, 106, 64);
 }
+
+@media (max-aspect-ratio: 1/1) {
+  table {
+    width: 100vw;
+    height: 100vw
+  }
+}

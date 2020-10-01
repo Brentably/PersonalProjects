@@ -6,12 +6,22 @@ function App() {
   const [gameGoing, setGameGoing] = useState(false)
   const [lostGame, setLostGame] = useState(false)
   const [int, setInt] = useState(500)
+  const [intId, setIntId] = useState(null)
   const [playerLocation, setPlayerLocation] = useState([1, 1])
-  const [special, setSpecial] = useState([[-30, 41]])
+  const [special, setSpecial] = useState([[-1, -1]])
   
 
 
-//Hello brent from the future! You have a few bugs to deal with today. First of all I'd like to point out that the step function is not working completely properly, it will jump a beat after every few steps or so. Next I'd like to point out that you never remove the specials from the specials array when they go off screen. Which isn't bad at first but will become a problem later on. Our chief problem though seems to be that the code is not properly detecting when the player hits one of the specials, which should end the game. IDFK  what to do, but YOU, YYOOUUU are wiser and smarter then me. and I believe Aang can save the world Doooo doo doo dooo
+//Hello brent from the future! You have a few bugs to deal with today. 
+// First of all I'd like to point out that the step function is not working completely properly, it will jump a beat after every few steps or so. 
+// moves two blocks every step instead of one
+// 
+// Next I'd like to point out that you never remove the specials from the specials array when they go off screen. Which isn't bad at first but will become a problem later on.
+// solved 
+// Our chief problem though seems to be that the code is not properly detecting when the player hits one of the specials, which should end the game.
+// IDFK  what to do, but YOU, YYOOUUU are wiser and smarter then me. and I believe Aang can save the world Doooo doo doo dooo
+// solved
+// New Issue: when you track the state of the specials, weird stuff is happening with the numbers, like the first array at index 0 is [-1, 19] when it started as [-1, -1], so it must've changed somehow? I'm setting useEffect to run after every update where the special changes, and it's running and console logging the special, but when you look at the specials in the console, they're the same
 
 
 
@@ -27,24 +37,30 @@ function App() {
   
   // deals with starting and stopping the game
 
-  let id
+
   const startGame = () => {
+    console.clear()
+    setSpecial([[-1, -1]])
     setGameGoing(true)
     setLostGame(false)
-    id = setInterval(nextStep, int);
+    setIntId(setInterval(nextStep, int));
   }
   
   useEffect(() => {
-    console.log(special)
-    if(special.includes(playerLocation)) {
+    // console.log(special)
+    // console.log(playerLocation)
+    // the following confusing if statement just checks if the special array contains an array equivalent to the playerLocation
+    if(special.some((arr) => (arr[0] === playerLocation[0] && arr[1] === playerLocation[1]))) {
       setLostGame(true)
       setGameGoing(false)
-      clearInterval(id)
-      console.log('hey')
+      clearInterval(intId)
+      // console.log('hey')
     }
-  }, [special, playerLocation, id])
+  }, [special, playerLocation, intId])
   
-
+  useEffect(() => {
+    console.log(special)
+  }, [special])
   
   
   
@@ -52,13 +68,13 @@ function App() {
   
   let i = 0
   const nextStep = () => {
-    if (lostGame) return
+    // if (lostGame) return
     i++
     
     // steps a two dimensional array
     const step = (twoDArr) => {
       return twoDArr.map(arr => {
-        arr[1]++
+        arr[1] += 1
         return arr
       })
     }
@@ -82,17 +98,16 @@ function App() {
 
       let newSpecial = generateNewSpecial()
       setSpecial((prevSpecial) => {
-        return [...prevSpecial].concat(newSpecial)
+        return [...step(prevSpecial)].concat(newSpecial).filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
       })
 
       i = 0
-    }
-    else {
+    } else {
       setSpecial((prevSpecial) => {
-        return [...step(prevSpecial)]
+        return [...step(prevSpecial)].filter((arr) => (arr[0] <= 17 && arr[1] <= 17))
       })
     }
-    // console.log("step")
+    console.log("step")
   }
   
   
@@ -100,7 +115,7 @@ function App() {
   return (
     <div onMouseOverCapture={handlePlayerLocation}>
     <Grid xSize={18} ySize={18} playerLocation={playerLocation} special={special} />
-    <div className="start" style={gameGoing && !lostGame ? {display: "none", cursor: "none"} : {display: "block"}} onClick={startGame}>click here to start</div>
+    <div className="start" style={!gameGoing && !lostGame ? {display: "block"} : {display: "none", cursor: "none"}} onClick={startGame}>click here to start</div>
     <div className="start" style={(!lostGame) ? {display: "none", cursor: "none"} : {display: "block"}} onClick={startGame}>You Lost (click to play again)</div>
     </div>
   );

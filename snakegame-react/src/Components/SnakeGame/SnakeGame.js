@@ -89,7 +89,9 @@ function SnakeGame() {
     setLost(true)
   }
 
-  if (snake[0][0] < 0 || snake[0][0] >= gridSize || snake[0][1] < 0 || snake[0][1] >= gridSize) lostFunction()
+  useEffect(() => {
+    if (snake[0][0] < 0 || snake[0][0] >= gridSize || snake[0][1] < 0 || snake[0][1] >= gridSize) lostFunction()
+  }, [snake])
 
   return (
     <div>
